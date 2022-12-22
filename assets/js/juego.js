@@ -91,7 +91,7 @@ const valorCarta = ( carta ) => {
 const turnoComputadora = ( puntosMinimos ) => {
     
    do {
-
+        
         const carta = pedirCarta();
         puntosComputadora = puntosComputadora + valorCarta( carta );
         puntosHtml[1].innerText = puntosComputadora
@@ -99,9 +99,9 @@ const turnoComputadora = ( puntosMinimos ) => {
         //<img class='carta' src="assets/cartas/2C.png" alt=""></img>
         const imgCarta = document.createElement('img');
         imgCarta.src = `assets/cartas/${ carta }.png`;
-        imgCarta.classList.add('carta');
-        divCartasComputadora.append( imgCarta );
-
+        imgCarta.classList.add('carta');     
+        divCartasComputadora.append( imgCarta );      
+        
         if( puntosMinimos > 21 ) {
             break;
         }
@@ -110,7 +110,18 @@ const turnoComputadora = ( puntosMinimos ) => {
 
     }while ( (puntosComputadora < puntosMinimos) && (puntosMinimos <= 21 ) );
 
-
+    setTimeout(() => {
+        if (puntosComputadora === puntosMinimos){
+            alert('Nadie Gana');
+        }else if (puntosMinimos > 21){
+            alert('Computadora Gana');
+        }else if (puntosComputadora > 21){
+            alert('Jugador Gana')
+        }else{
+            alert('Computadora Gana')
+        }
+    }, 50 );
+    
 }
 
 //Eventos
@@ -126,6 +137,7 @@ btnPedir.addEventListener('click', () => {
     imgCarta.src = `assets/cartas/${ carta }.png`;
     imgCarta.classList.add('carta');
     divCartasJugador.append( imgCarta );
+    
 
     if ( puntosJugador > 21 ) {
         console.warn('Lo siento mucho, perdiste');
@@ -148,6 +160,9 @@ btnDetener.addEventListener('click', () => {
     turnoComputadora( puntosJugador );
 
 
+
 })
+
+
 
 
